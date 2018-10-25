@@ -1,9 +1,9 @@
 const API_URL = 'http://localhost:3000/api'
 
-export default function http(url, { headers, ...options } = {}) {
+const http = (url, { headers, ...options } = {}) => {
   return fetch(`${API_URL}${url}`, {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: http.token,
       ...headers
@@ -25,4 +25,7 @@ export default function http(url, { headers, ...options } = {}) {
   })
 }
 
+http.token = ''
 http.onError = () => {}
+
+export default http

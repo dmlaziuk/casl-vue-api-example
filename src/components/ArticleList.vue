@@ -39,6 +39,16 @@
 <script>
 import { mapActions } from 'vuex'
 
+class Article {
+  static get modelName () { return 'Article' }
+  constructor ({ id, author_id, title, body }) {
+    this.id = id
+    this.author_id = author_id
+    this.title = title
+    this.body = body
+  }
+}
+
 export default {
   filters: {
     short (value) {
@@ -52,7 +62,9 @@ export default {
   },
   created () {
     this.getArticles()
-      .then(articles => { this.articles = articles })
+      .then(articles => {
+        this.articles = articles.map(article => new Article(article))
+      })
       .catch(error => this.error(error.message))
   },
   methods: {

@@ -13,7 +13,7 @@ Vue.use(Vuetify)
 Vue.use(confirmPlugin)
 Vue.use(abilitiesPlugin, ability.ability)
 
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,
