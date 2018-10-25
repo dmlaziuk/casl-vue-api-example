@@ -41,9 +41,9 @@ import { mapActions } from 'vuex'
 
 class Article {
   static get modelName () { return 'Article' }
-  constructor ({ id, author_id, title, body }) {
+  constructor ({ id, user_id, title, body }) {
     this.id = id
-    this.author_id = author_id
+    this.user_id = user_id
     this.title = title
     this.body = body
   }

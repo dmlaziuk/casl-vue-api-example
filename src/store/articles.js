@@ -6,17 +6,17 @@ export default {
   actions: {
     find () {
       return http('/articles')
-        .then(response => response.body.items)
+        .then(response => response.body.articles)
     },
 
     findById (_, id) {
       return http(`/articles/${id}`)
-        .then(response => response.body.item)
+        .then(response => response.body.article)
     },
 
     destroy (_, article) {
       return http(`/articles/${article.id}`, { method: 'DELETE' })
-        .then(response => response.body.item)
+        .then(response => response.body.article)
     },
 
     save (_, article) {
@@ -24,7 +24,7 @@ export default {
         ? http(`/articles/${article.id}`, { method: 'PUT', body: JSON.stringify(article) })
         : http('/articles', { method: 'POST', body: JSON.stringify(article) })
 
-      return request.then(response => response.body.item)
+      return request.then(response => response.body.article)
     }
   }
 }
