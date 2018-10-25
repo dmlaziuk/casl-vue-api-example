@@ -1,12 +1,12 @@
 export default (options) => (store) => {
-  if (localStorage.state) {
-    const storedState = JSON.parse(localStorage.state)
+  if (window.localStorage.state) {
+    const storedState = JSON.parse(window.localStorage.state)
     store.replaceState(Object.assign(store.state, storedState))
   }
 
   return store.subscribe((mutation, state) => {
     if (options.destroyOn && options.destroyOn.indexOf(mutation.type) !== -1) {
-      return localStorage.removeItem('state')
+      return window.localStorage.removeItem('state')
     }
 
     const newState = options.storedKeys.reduce((map, key) => {
@@ -14,6 +14,6 @@ export default (options) => (store) => {
       return map
     }, {})
 
-    localStorage.state = JSON.stringify(newState)
+    window.localStorage.state = JSON.stringify(newState)
   })
 }

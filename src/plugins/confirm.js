@@ -1,9 +1,9 @@
 import Confirm from '../components/Confirm'
 
-export function confirmPlugin(Vue) {
+export function confirmPlugin (Vue) {
   const ConfirmComponent = Vue.extend(Confirm)
 
-  Vue.prototype.$confirm = function(message, title, params = {}) {
+  Vue.prototype.$confirm = function (message, title, params = {}) {
     const dialog = new ConfirmComponent({
       parent: this.$root,
       propsData: {

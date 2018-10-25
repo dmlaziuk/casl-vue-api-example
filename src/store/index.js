@@ -1,22 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storage from './storage'
-import { abilityPlugin, ability as appAbility } from './ability'
+import ability from './ability'
 import notifications from './notifications'
 import articles from './articles'
 import http from '../services/http'
 
 Vue.use(Vuex)
 
-export const ability = appAbility
-
-export const store = new Vuex.Store({
+const store = new Vuex.Store({
   plugins: [
     storage({
       storedKeys: ['token', 'rules'],
       destroyOn: ['destroySession']
     }),
-    abilityPlugin
+    ability.abilityPlugin
   ],
 
   modules: {
@@ -31,35 +29,35 @@ export const store = new Vuex.Store({
   },
 
   getters: {
-    isLoggedIn(state) {
+    isLoggedIn (state) {
       return !!state.token
     }
   },
 
   mutations: {
-    createSession(state, session) {
+    createSession (state, session) {
       state.token = session.token
       state.rules = session.rules
       http.token = session.token
     },
 
-    destroySession(state) {
+    destroySession (state) {
       state.token = ''
       state.rules = []
     }
   },
 
   actions: {
-    login({ commit }, details) {
+    login ({ commit }, details) {
       return http('/session', { method: 'POST', body: JSON.stringify(details) })
         .then(response => commit('createSession', response.body))
     },
 
-    logout({ commit }) {
+    logout ({ commit }) {
       commit('destroySession')
     },
 
-    setTitle({ state }, value) {
+    setTitle ({ state }, value) {
       state.pageTitle = value
     }
   }
@@ -72,3 +70,5 @@ http.onError = response => {
     return true
   }
 }
+
+export default store

@@ -8,18 +8,18 @@ export default {
   },
 
   mutations: {
-    add(state, message) {
+    add (state, message) {
       message.id = message.id || ++COUNTER
       state.stack.push(message)
     },
 
-    remove(state, message) {
+    remove (state, message) {
       state.stack = state.stack.filter(m => m !== message)
     }
   },
 
   actions: {
-    info({ commit }, message) {
+    info ({ commit }, message) {
       commit('add', {
         timeout: 3000,
         type: 'info',
@@ -27,7 +27,7 @@ export default {
       })
     },
 
-    error({ commit }, message) {
+    error ({ commit }, message) {
       commit('add', {
         timeout: 3000,
         type: 'error',
@@ -35,7 +35,7 @@ export default {
       })
     },
 
-    remove({ commit }, message) {
+    remove ({ commit }, message) {
       commit('remove', message)
     }
   }

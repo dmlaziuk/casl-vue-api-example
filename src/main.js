@@ -4,13 +4,14 @@ import { abilitiesPlugin } from '@casl/vue'
 import { confirmPlugin } from './plugins/confirm'
 import App from './App'
 import router from './router'
-import { store, ability } from './store'
+import ability from './store/ability'
+import store from './store'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(confirmPlugin)
-Vue.use(abilitiesPlugin, ability)
+Vue.use(abilitiesPlugin, ability.ability)
 
 new Vue({
   el: '#app',

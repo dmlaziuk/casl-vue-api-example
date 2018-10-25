@@ -5,33 +5,33 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
-  export default {
-    data() {
-      return {
-        article: {
-          title: '',
-          body: ''
-        }
-      }
-    },
-    methods: {
-      ...mapActions('articles', {
-        getArticle: 'findById'
-      })
-    },
-    created() {
-      const id = this.$route.params.id
-
-      if (id) {
-        this.$store.dispatch('setTitle', 'View Article')
-        this.getArticle(id)
-          .then(article => {
-            this.article = article
-            this.$store.dispatch('setTitle', article.title)
-          })
+export default {
+  data () {
+    return {
+      article: {
+        title: '',
+        body: ''
       }
     }
+  },
+  created () {
+    const id = this.$route.params.id
+
+    if (id) {
+      this.$store.dispatch('setTitle', 'View Article')
+      this.getArticle(id)
+        .then(article => {
+          this.article = article
+          this.$store.dispatch('setTitle', article.title)
+        })
+    }
+  },
+  methods: {
+    ...mapActions('articles', {
+      getArticle: 'findById'
+    })
   }
+}
 </script>
